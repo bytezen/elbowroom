@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Spacebrew-Elm-Client Sandbox</title>
+</head>
+<body>
+	<!-- the elm generated code -->
+	<script type="text/javascript" src="clientelm.js"></script>
+	<!-- API code to interface with elm -->
+	<script type="text/javascript">
+		/*
+		; (function () {
+
+			// function connnectElmWorker(elm) {
+			// 	function log (value) {
+			// 		console.log(
+			// 			'[' + (new Date).toISOString() + ']: ' + value
+			// 			)
+			// 	}
+
+			// 	let worker = elm.Client.worker();
+
+			// 	// connect worker to functions in this space	
+			// 	worker.ports.messageReceived.subscribe(log);
+
+
+			// 	//subscribe to the Cmd ports from elm
+
+			// 	return worker;
+			// }
+
+
+			if (typeof this.elmBridge === 'undefined'
+				&& this.Elm != 'undefined'
+				) {
+				// let worker = connnectElmWorker(this.Elm);
+			console.log('got here', worker)
+				this.elmBridge = this.Elm.Client.worker();//.ports;
+			} else {
+				console.log(
+		            'Any one or more of the following PROBLEMS were encountered:\
+		            \n  - "elmBridge" is ALREADY DEFINED.\
+		            \n  - "Elm" is undefined for this application'
+					)
+			}
+		}).call(this)
+		*/
+	</script>
+	<!-- try to connect to elm ports -->
+	<script type="text/javascript">
+		/* 
+			adapted from: 
+			https://gist.github.com/bytezen/a47c3734fda79576b4e36042b3b910c1
+		*/
+		; (function() {
+			let name = "dummyClient"
+			   ,description = "a client to test elm spacebrew development"
+			   ,subscribes = []
+			   ,publishes = []
+			   ,addSubscribe = (name, type) => 
+				   						{
+				   							subscribes.push({name, type})
+				   						}
+			   // ,addPublish = (name, type, default) => 
+			   							// { 
+			   							// 	publishes.push(
+			   							// 		{name,type,default})
+			   							// } 
+			//run the main stuff here
+				function log (value) {
+					console.log(
+						'[' + (new Date).toISOString() + ']: ' + value
+						)
+				}
+
+				this.elmBridge = this.Elm.Client.worker();
+
+				console.log('[main]')
+				this.elmBridge.ports.messageReceived.subscribe(log);
+				this.elmBridge.ports.log.subscribe(log);
+
+			
+
+
+		})()
+	</script>
+</body>
+</html>
